@@ -1,0 +1,42 @@
+
+<html>
+<head>
+<link rel="stylesheet" href="css/main.css">
+<base target="_parent" />
+</head>
+<body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script>
+	$(document).ready(function() {
+	    var theURL = location.search;
+	    var paramValue = theURL.split('=')[1];
+	    getEmailJSON(paramValue);	    
+	});
+	
+	function getEmailJSON(xID){
+		$.getJSON( "data/emails.json", function(data) {
+			var items = [];
+			$.each( data, function(key) {
+				// show only matching email
+				if (data[key]._id == xID){
+					$( "div" ).empty();
+					// load first email
+					items.push("<div class='emailDisplayDiv'><span class='b'>From: </span>" + data[key].fromName + "<br/><span class='b'>To: </span>MISSING FROM JSON<br/><span class='b'>Received: </span>" + data[key].dateReceived + "<br/><hr><span class='b'>Subject: </span>" + data[key].subject + "<br/><br/>" +  data[key].content);
+				}
+			});
+			 
+			  $( "<ul/>", {
+			    
+			    html: items.join( "" )
+			  }).appendTo( "body" );
+		});
+	}
+
+</script>
+
+
+<div class="emailDisplayDiv">
+LOADING EMAIL...
+</div>
+
+</body>
