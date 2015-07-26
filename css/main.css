@@ -1,0 +1,25 @@
+.plainText {
+	font-family: "Arial";
+}
+
+.emailItemCls {
+	font-family: "Arial";
+	cursor: pointer;
+	text-decoration: none;
+	color: black;
+}
+
+.iFrameDiv {
+	white-space:nowrap;
+	font-size:0;
+}
+
+.emailDisplayDiv{
+	font-family: "Arial";
+	text-decoration: none;
+	color: black;
+}
+
+.b {
+	font-weight: bold;
+}
