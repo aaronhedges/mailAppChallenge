@@ -1,83 +1,37 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<html>
-<head>
-<link rel="stylesheet" href="css/main.css">
-<base target="_parent" />
-</head>
-<body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <!-- Place favicon.ico in the root directory -->
 
+        <!---<link rel="stylesheet" href="css/normalize.css">--->
+        <link rel="stylesheet" href="css/main.css">
+        <!---<script src="js/vendor/modernizr-2.8.3.min.js"></script>--->
+    </head>
+    <body>
 
-<script>
+        <h1><img src="image/fyberLogo.png"> Mail Client</h1>
 
-	$(document).ready(function() {
-	    //set initial state.
-	
-	    $('#showRead').change(function() {
-		if($(this).is(":checked")) {
-		    var returnVal = $(this).attr("checked", returnVal);
-		}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+ 
+        <div class="iFrameDiv">
+        <iframe src="emailList.html" height="600" width="400" frameBorder="0" seamless id="emailListFrame"></iframe> 
+        <iframe src="" height="600" width="800" frameBorder="0" seamless id="emailDisplayFrame"></iframe>         
+        <div>
+        
+        <script>
 
-		// clear loaded email
-		$( "div" ).empty();
-		// reloaded email after checkbox change
-		getEmail();
-
-	    });
-	    
-	    // default load email
-	    getEmail();
-	    
-	    
-	});
-	
-	function getEmail(){
-		
-		$.getJSON( "data/emails.json", function(data) {
-			var items = [];
-			$.each( data, function(key) {
-				if($('#showRead').is(":checked")){
-					// show all
-					// load first email
-					if (items.length == 0){
-						selectEmail(data[key]._id);
-					}
-					var shortContent = data[key].content.substring(0,40) + '...';
-					    items.push( "<div class='emailItemCls' id='" + data[key]._id + "'>" + data[key].fromName + "   " + data[key].dateReceived + "<br/>"+ data[key].subject + "<br/>"
-						  + shortContent + "<hr></div>" );
-					} 
-				else {
-					// show only unread email
-					if (data[key].read == true){
-						// load first email
-						if (items.length == 0){
-							selectEmail(data[key]._id);
-						}
-						var shortContent = data[key].content.substring(0,40) + '...';
-						items.push("<div id='" + data[key]._id + "'>" + data[key].fromName + "   " + data[key].dateReceived + "<br/>"+ data[key].subject + "<br/>" + shortContent + "<hr></div>" );
-					}
-				}   
-			});
-			 
-			  $( "<ul/>", {
-			    'class' : 'emailItemCls',
-			    html: items.join( "" )
-			  }).appendTo( "body" );
-		});
+        function pSelectEmail(ID) {
+	   $('#emailDisplayFrame').attr('src', "emailDisplay.html?ID=" + ID);
 	}
-	
-	function selectEmail(ID){
-		parent.pSelectEmail(ID);
-	}
+        
+        </script>
 
-</script>
-
-<form id="emailListForm" class="plainText">
-	<input type="checkbox" id="showRead">Show Read
-</form><br />
-
-<div id="emailListDiv">
-</div>
-
-</body>
+    </body>
 </html>
