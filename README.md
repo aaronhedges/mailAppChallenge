@@ -1,0 +1,3 @@
+# mailAppChallenge
+
+This application is a quick and dirty JavaScript challenge to create a JS email client application. Due to time constraints there are some additional notes in with the JS about decisions made and additional potential future issues to address, such as HTML enriched "body" or "content" data. Additionally, the decision to use iFrame was a quick solution but ultimately the framework should adapt to screen size. I would also like to consolidate the code into more of a MVC framework but this is also the result of cutting corners due to time constraints. Same with only developing and testing in the Chrome browser. Thanks.
