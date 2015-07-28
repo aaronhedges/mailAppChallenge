@@ -1,4 +1,3 @@
-
 <html>
 <head>
 <link rel="stylesheet" href="css/main.css">
@@ -36,16 +35,23 @@
 		$.getJSON( "data/emails.json", function(data) {
 			var items = [];
 			$.each( data, function(key) {
+				/* The if / else here is a bit of a hack. I would actually prefer to not have this UI removed it will encourage users to not delete read emails and/or to forget to answer them.
+				If for a particular reason the show/hide of read emails should remain that should also potentially be a URL variable provided to the backend template so that number of emails
+				loaded is limited to only what is requested, rather than having to loop through the JSON results and filter out emails. Ideally, I would suggest a UI change similar to the Microsoft 360
+				email where an unread email could have a color indicator stating that it hasn't been yet read. Also, the backend should limit to potentially 20 emails at a time and a scroll of the email list
+				could then later trigger a load of another emails. Otherwise, I'm guessing right now the backend would just load "all" emails which would cause performance issues with the server
+				since we don't need to load potentially thousands of emails each time someone uses the email app. */
 				if($('#showRead').is(":checked")){
 					// show all
 					// load first email
 					if (items.length == 0){
 						selectEmail(data[key]._id);
 					}
+					// shorten email body for display in email list
 					var shortContent = data[key].content.substring(0,40) + '...';
-					    items.push( "<div class='emailItemCls' id='" + data[key]._id + "'>" + data[key].fromName + "   " + data[key].dateReceived + "<br/>"+ data[key].subject + "<br/>"
-						  + shortContent + "<hr></div>" );
-					} 
+					// build primary html output
+					items.push( "<div class='emailItemCls' id='" + data[key]._id + "'>" + data[key].fromName + "   " + data[key].dateReceived + "<br/>"+ data[key].subject + "<br/>" + shortContent + "<hr></div>" );
+				}
 				else {
 					// show only unread email
 					if (data[key].read == true){
@@ -53,14 +59,17 @@
 						if (items.length == 0){
 							selectEmail(data[key]._id);
 						}
+						// shorten email body for display in email list
 						var shortContent = data[key].content.substring(0,40) + '...';
+						// build primary html output
 						items.push("<div id='" + data[key]._id + "'>" + data[key].fromName + "   " + data[key].dateReceived + "<br/>"+ data[key].subject + "<br/>" + shortContent + "<hr></div>" );
 					}
 				}   
 			});
-			 
-			  $( "<ul/>", {
-			    'class' : 'emailItemCls',
+			// loop through data and append to body with custom 
+			$( "<ul/>", {
+			    class : 'emailItemCls',
+			    click: function(){  selectEmail(event.target.id);},
 			    html: items.join( "" )
 			  }).appendTo( "body" );
 		});
