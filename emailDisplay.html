@@ -1,4 +1,3 @@
-
 <html>
 <head>
 <link rel="stylesheet" href="css/main.css">
@@ -16,6 +15,9 @@
 	function getEmailJSON(xID){
 		$.getJSON( "data/emails.json", function(data) {
 			var items = [];
+			/* this solution is also a bit of a "hack". It would make more sense to have the backend serve only a single email via json if a unique ID is provided to the 
+			backend template via the URL string. Otherwise this has to reload 100+ emails and loop through them. We should ultimately limit the amount of server processing needed for the application.
+			*/
 			$.each( data, function(key) {
 				// show only matching email
 				if (data[key]._id == xID){
