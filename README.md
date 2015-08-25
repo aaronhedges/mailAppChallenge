@@ -8,7 +8,7 @@ For XYZ Company employees, we have decided to write our own e-mail client, as th
 - The list is grouped by date
 - The list is filterable by "unread e-mails", or "read & unread e-mails". Grouping still applied.
 - After clicking on an e-mail in the list, details are shown in the panel on the right hand side.
-- 
+
 You are free to choose any framework or library for this task, but would recommend to keep it simple. We are looking for good JavaScript developers, not good [insert framework] developers. If you have time left, feel free to make the interfact attractive with enter/exit animations when applying filters, or when selecting an e-email to show in the main content panel.
 
 Delivery
